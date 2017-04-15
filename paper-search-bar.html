@@ -153,6 +153,13 @@ Bar in which the user can enter search terms and filter
 			'enter': '_search'
 		},
 
+    /**
+     * Puts focus on the search bar
+     */
+		focus: function() {
+			this.$.input.focus();
+		}
+
 		// Private methods
 		_filter: function(e) {
 			this.fire('paper-search-filter');
