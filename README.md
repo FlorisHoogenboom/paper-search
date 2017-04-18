@@ -5,22 +5,9 @@ paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http:
 
 `paper-search` provides components for a Material Design [search](https://www.google.com/design/spec/patterns/search.html). The web components are built with [Polymer 1.x](https://www.polymer-project.org).
 
-Screenshot: Search Panel
-
-![Screenshot: Panel](/doc/search-panel-screenshot.png "Screenshot: Panel")
-
-Screenshot: Select filter from Filtering Dialog
-
-![Screenshot: Filter dialog - filters](/doc/filter-dialog-filters-screenshot.png "Screenshot: Filter dialog - filters")
-
-Screenshot: Select values from Filtering Dialog
-
-![Screenshot: Filter dialog - values](/doc/filter-dialog-values-screenshot.png "Screenshot: Filter dialog - values")
-
-
 To use these elements:
 
-`bower install paper-search`
+`bower install https://github.com/FlorisHoogenboom/paper-search.git#{commit sha}`
 
 
 ## License

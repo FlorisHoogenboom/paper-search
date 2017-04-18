@@ -98,6 +98,11 @@ Bar in which the user can enter search terms and filter
 		 *
 		 * @event paper-search-clear
 		 */
+		 /**
+		 * Fired when the user stops typing
+		 *
+		 * @event stopped-typing
+		 */
 
 		properties: {
 			/**
@@ -106,7 +111,8 @@ Bar in which the user can enter search terms and filter
 			query: {
 				type: String,
 				notify: true,
-				value: ''
+				value: '',
+				observer: '_queryChanged'
 			},
 			/**
 			 * Whether to hide the Filter button. Set attribute "hide-filter-button" to do so.
@@ -153,12 +159,38 @@ Bar in which the user can enter search terms and filter
 			'enter': '_search'
 		},
 
-    /**
+		ready: function() {
+			this.typingTimeout = null;
+		},
+
+		// Observers
+
+		/**
+     * Observer intended to check whether user has finished typing.
+		 * Fires stoped-typing event when user has not entered new input
+     */
+
+		 _queryChanged: function() {
+			 if (this.typingTimeout != null) {
+				 clearTimeout(this.typingTimeout);
+			 }
+
+			 if (this.query.length > 0) {
+				 this.typingTimeout = setTimeout(() => {
+					 this.fire('stopped-typing', {query: this.query});
+				 }, 500 );
+			 }
+		 },
+
+		// General methods
+
+		/**
      * Puts focus on the search bar
+		 * This does not add the focus selector to the paper-search-bar itself
      */
 		focus: function() {
 			this.$.input.focus();
-		}
+		},
 
 		// Private methods
 		_filter: function(e) {
@@ -167,6 +199,7 @@ Bar in which the user can enter search terms and filter
 		_clear: function() {
 			this.query = "";
 			this.$.input.focus();
+			this._queryChanged();
 			this.fire('paper-search-clear');
 		},
 		_search: function() {
